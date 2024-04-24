@@ -8,9 +8,9 @@ jobs:
       matrix:
         os: [windows-latest]
         build_type: [Release]
-        enable_ui: [off]
+        enable_ui: [on]
         include:
-          - os: ubuntu-latest
+          - os: windows-latest
             build_type: Release
             enable_ui: on
     steps:
@@ -41,7 +41,7 @@ jobs:
         else
           export enable_ccache=on
         fi
-        curl -L https://github.com/blueloveTH/aseprite/releases/dowbload/v0.01/skia.zip--output skia.zip
+        curl -L https://github.com/blueloveTH/aseprite/releases/download/v0.01/skia.zip --output skia.zip
         7z x skia.zip
         cmake -S . -B build -G Ninja \
           -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
@@ -56,8 +56,8 @@ jobs:
       run: |
         cd build && ninja
     - uses: actions/upload-artifact@v3
-      with:
-        name: aseprite
-        path: |
-          D:/a/aseprite/aseprite/build/bin/data
-          D:/a/aseprite/aseprite/build/bin/aseprite.exe 
+      with:
+        name: aseprite
+        path: |
+          D:/a/aseprite/aseprite/build/bin/data
+          D:/a/aseprite/aseprite/build/bin/aseprite.exe
